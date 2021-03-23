@@ -11,6 +11,7 @@
   "author": "Mustafa Fathi",
   "license": "MIT",
   "dependencies": {
+    "@sendgrid/mail": "^7.4.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "consola": "^2.15.3",
@@ -20,6 +21,7 @@
     "express": "^4.17.1",
     "express-validator": "^6.10.0",
     "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
     "mongoose": "^5.12.2",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0"
