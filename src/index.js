@@ -3,15 +3,19 @@ import consola from "consola"
 import express from "express"
 import mongoose from "mongoose"
 import { json } from "body-parser"
+import passport from "passport"
 
 import { DB, PORT } from "./constants/index"
 
+// router imports
 import usersApi from './apis/users'
+require("./middlewares/passport-middleware")
 
 const app = express();
 
 app.use(cors())
 app.use(json())
+app.use(passport.initialize())
 
 app.use('/users', usersApi)
 
