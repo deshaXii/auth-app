@@ -1,6 +1,7 @@
 import cors from "cors"
 import consola from "consola"
 import express from "express"
+import { join } from 'path'
 import mongoose from "mongoose"
 import { json } from "body-parser"
 import passport from "passport"
@@ -9,6 +10,7 @@ import { DB, PORT } from "./constants/index"
 
 // router imports
 import usersApi from './apis/users'
+import profilesApi from './apis/profiles'
 require("./middlewares/passport-middleware")
 
 const app = express();
@@ -17,7 +19,10 @@ app.use(cors())
 app.use(json())
 app.use(passport.initialize())
 
+app.use(express.static(join(__dirname, './uploads')))
+
 app.use('/users', usersApi)
+app.use('/profiles', profilesApi)
 
 
 const main = async () => {
