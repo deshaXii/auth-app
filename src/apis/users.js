@@ -49,7 +49,7 @@ router.post(
       let html = `
         <h1>hello, ${user.username} </h1>
         <p>Please click the following link to verify your account</p>
-        <a href="${DOMAIN}users/verify-now/${user.verificationCode}">Verify Now</a>
+        <a href="${DOMAIN}users/api/verify-now/${user.verificationCode}">Verify Now</a>
         `;
       sendMail(
         user.email,
@@ -77,7 +77,7 @@ router.post(
  * @api /users/verify-now/verificationCode
  * @type GET
  */
-router.get("/verify-now/:verificationCode", async (req, res) => {
+router.get("/api/verify-now/:verificationCode", async (req, res) => {
   try {
     let { verificationCode } = req.params;
     let user = await User.findOne({ verificationCode });
@@ -105,7 +105,7 @@ router.get("/verify-now/:verificationCode", async (req, res) => {
  * @type POST
  */
 router.post(
-  "/api/authenticate",
+  "/api/login",
   AuthenticateValidations,
   validator,
   async (req, res) => {
@@ -146,7 +146,7 @@ router.post(
  * @api /users/api/authenticate
  * @type GET
  */
-router.get("/api/authenticate", userAuth, async (req, res) => {
+router.get("/api/me", userAuth, async (req, res) => {
   return res.status(200).json({
     user: req.user,
   });
@@ -179,7 +179,7 @@ router.put(
         <h1>hello, ${user.username} </h1>
         <p>Please click the following link to reset your password</p>
         <p>if this password reset request is not created by your then you can ignore this email.</p>
-        <a href="${DOMAIN}users/rest-password-now/${user.resetPasswordToken}">Verify Now</a>
+        <a href="${DOMAIN}users/api/rest-password-now/${user.resetPasswordToken}">Verify Now</a>
         `;
       sendMail(user.email, "Reset Password", "Please Reset Password.", html);
       return res.status(200).json({
@@ -201,7 +201,7 @@ router.put(
  * @api /users/reset-password-now/:resetPasswordToken
  * @type GET
  */
-router.get("/rest-password-now/:resetPasswordToken", async (req, res) => {
+router.get("/api/rest-password-now/:resetPasswordToken", async (req, res) => {
   try {
     let { resetPasswordToken } = req.params;
     let user = await User.findOne({
@@ -226,7 +226,7 @@ router.get("/rest-password-now/:resetPasswordToken", async (req, res) => {
  * @api /users/api/reset-password-now
  * @type POST
  */
-router.post("/reset-password-now", async (req, res) => {
+router.post("/api/reset-password-now", async (req, res) => {
   try {
     let { resetPasswordToken, password } = req.body;
     let user = await User.findOne({

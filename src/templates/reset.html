@@ -31,7 +31,7 @@
                     let {password, confirm_password} = this
                     let resetPasswordToken = window.location.href.split('/').pop()
                     if (password && (password === confirm_password)) {
-                        let data = await fetch('/users/reset-password-now', {
+                        let data = await fetch('/users/api/reset-password-now', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'

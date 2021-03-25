@@ -11,6 +11,7 @@ import { DB, PORT } from "./constants/index"
 // router imports
 import usersApi from './apis/users'
 import profilesApi from './apis/profiles'
+import postsApi from './apis/posts'
 require("./middlewares/passport-middleware")
 
 const app = express();
@@ -23,6 +24,7 @@ app.use(express.static(join(__dirname, './uploads')))
 
 app.use('/users', usersApi)
 app.use('/profiles', profilesApi)
+app.use('/posts', postsApi)
 
 
 const main = async () => {

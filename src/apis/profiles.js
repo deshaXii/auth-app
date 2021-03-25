@@ -97,7 +97,7 @@ router.put(
     } catch (err) {
       return res.status(400).json({
         success: false,
-        message: "Unable to get the profile.",
+        message: "Unable to edit the profile.",
       });
     }
   }
